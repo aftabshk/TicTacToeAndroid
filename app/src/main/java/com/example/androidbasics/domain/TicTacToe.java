@@ -49,19 +49,22 @@ public class TicTacToe {
         return this.players.get(this.currentPlayerIndex);
     }
 
-    private boolean isWinner(Player player) {
-        Set<Integer> playerMoves = player.getMoves();
-
-        return this.winningMoves.stream().anyMatch((moves) -> {
-            return playerMoves.containsAll(moves);
-        });
-    }
-
     public Player winner() {
         return this.players.stream().reduce(null, (winner, player) -> {
             if (winner != null) return winner;
             if (isWinner(player)) return player;
             return winner;
         });
+    }
+
+    public void reset() {
+        this.players.forEach(Player::reset);
+        this.currentPlayerIndex = 0;
+    }
+
+    private boolean isWinner(Player player) {
+        Set<Integer> playerMoves = player.getMoves();
+
+        return this.winningMoves.stream().anyMatch(playerMoves::containsAll);
     }
 }

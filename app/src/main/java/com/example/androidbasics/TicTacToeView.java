@@ -67,5 +67,32 @@ public class TicTacToeView extends AppCompatActivity {
         layout.addView(this.createRow(IntStream.rangeClosed(1, 3).toArray()));
         layout.addView(this.createRow(IntStream.rangeClosed(4, 6).toArray()));
         layout.addView(this.createRow(IntStream.rangeClosed(7, 9).toArray()));
+
+        findViewById(R.id.reset).setOnClickListener((button) -> {
+            System.out.println("Resetting ------>");
+            this.ticTacToe.reset();
+            this.resetLayout(layout);
+            this.playerNameView.setText(this.ticTacToe.getCurrentPlayer().titleForTurn());
+            this.winnerNameView.setText("");
+        });
+    }
+
+    private void resetLayout(LinearLayout layout) {
+        System.out.println("Resetting layout------>");
+        int childCount = layout.getChildCount();
+
+        for (int i = 0; i < childCount; i++) {
+            View childAt = layout.getChildAt(i);
+            if (childAt instanceof LinearLayout) {
+                resetLayout((LinearLayout) childAt);
+            }
+            if (childAt instanceof TextView) {
+                resetTextView((TextView) childAt);
+            }
+        }
+    }
+
+    private void resetTextView(TextView view) {
+        view.setText("");
     }
 }
