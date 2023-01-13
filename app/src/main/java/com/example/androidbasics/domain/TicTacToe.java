@@ -25,7 +25,10 @@ public class TicTacToe {
     }
 
     public boolean isAlreadyPlayed(Integer position) {
-        Set<Integer> allMoves = Stream.of(this.players.get(0).getMoves(), this.players.get(1).getMoves())
+        Set<Integer> allMoves = Stream.of(
+                        this.players.get(0).getMoves(),
+                        this.players.get(1).getMoves()
+                )
                 .flatMap(x -> x.stream())
                 .collect(Collectors.toSet());
 

@@ -23,8 +23,8 @@ public class MoveListener implements View.OnClickListener {
     public void onClick(View view) {
         if (game.isAlreadyPlayed(indexOfCell)) return;
 
-        game.play(indexOfCell);
         cell.setText(game.getCurrentPlayer().getSymbol().toString());
+        game.play(indexOfCell);
         playerNameView.setText(game.getCurrentPlayer().titleForTurn());
     }
 }
