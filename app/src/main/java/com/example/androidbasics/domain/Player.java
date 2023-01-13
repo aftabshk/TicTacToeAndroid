@@ -1,6 +1,5 @@
 package com.example.androidbasics.domain;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,5 +22,9 @@ public class Player {
 
     public Symbol getSymbol() {
         return symbol;
+    }
+
+    public String titleForTurn() {
+        return String.format("Player %s's turn", this.symbol);
     }
 }
