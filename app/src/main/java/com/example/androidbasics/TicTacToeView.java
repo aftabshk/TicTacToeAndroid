@@ -20,6 +20,7 @@ public class TicTacToeView extends AppCompatActivity {
 
     private final TicTacToe ticTacToe = new TicTacToe();
     private TextView playerNameView;
+    private TextView winnerNameView;
 
     public TextView createCell(int index) {
         GradientDrawable border = new GradientDrawable();
@@ -32,7 +33,14 @@ public class TicTacToeView extends AppCompatActivity {
         cell.setGravity(Gravity.CENTER);
         cell.setBackground(border);
         cell.setClickable(true);
-        cell.setOnClickListener(new MoveListener(this.ticTacToe, cell, index, playerNameView));
+        cell.setOnClickListener(new MoveListener(
+                        this.ticTacToe,
+                        cell,
+                        index,
+                        playerNameView,
+                        winnerNameView
+                )
+        );
 
         return cell;
     }
@@ -54,6 +62,7 @@ public class TicTacToeView extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         LinearLayout layout = findViewById(R.id.board);
         this.playerNameView = findViewById(R.id.player_name);
+        this.winnerNameView = findViewById(R.id.winner_name);
         this.playerNameView.setText(this.ticTacToe.getCurrentPlayer().titleForTurn());
         layout.addView(this.createRow(IntStream.rangeClosed(1, 3).toArray()));
         layout.addView(this.createRow(IntStream.rangeClosed(4, 6).toArray()));

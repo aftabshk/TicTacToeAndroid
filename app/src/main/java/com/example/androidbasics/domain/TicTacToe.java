@@ -1,6 +1,5 @@
 package com.example.androidbasics.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -11,10 +10,21 @@ import java.util.stream.Stream;
 public class TicTacToe {
     private final List<Player> players;
     private Integer currentPlayerIndex;
+    private final Set<Set<Integer>> winningMoves;
 
     public TicTacToe() {
         this.players = Arrays.asList(new Player(Symbol.X), new Player(Symbol.O));
         this.currentPlayerIndex = 0;
+        this.winningMoves = new HashSet<>(Arrays.asList(
+                new HashSet<>(Arrays.asList(1, 2, 3)),
+                new HashSet<>(Arrays.asList(4, 5, 6)),
+                new HashSet<>(Arrays.asList(7, 8, 9)),
+                new HashSet<>(Arrays.asList(1, 4, 7)),
+                new HashSet<>(Arrays.asList(2, 5, 8)),
+                new HashSet<>(Arrays.asList(3, 6, 9)),
+                new HashSet<>(Arrays.asList(1, 5, 9)),
+                new HashSet<>(Arrays.asList(3, 5, 7))
+        ));
     }
 
     public void play(Integer position) {
@@ -37,5 +47,21 @@ public class TicTacToe {
 
     public Player getCurrentPlayer() {
         return this.players.get(this.currentPlayerIndex);
+    }
+
+    private boolean isWinner(Player player) {
+        Set<Integer> playerMoves = player.getMoves();
+
+        return this.winningMoves.stream().anyMatch((moves) -> {
+            return playerMoves.containsAll(moves);
+        });
+    }
+
+    public Player winner() {
+        return this.players.stream().reduce(null, (winner, player) -> {
+            if (winner != null) return winner;
+            if (isWinner(player)) return player;
+            return winner;
+        });
     }
 }
