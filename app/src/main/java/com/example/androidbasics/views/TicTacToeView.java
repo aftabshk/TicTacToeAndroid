@@ -1,4 +1,4 @@
-package com.example.androidbasics;
+package com.example.androidbasics.views;
 
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -11,7 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.androidbasics.R;
 import com.example.androidbasics.domain.TicTacToe;
+import com.example.androidbasics.listeners.MoveListener;
 
 import java.util.Arrays;
 import java.util.stream.IntStream;
@@ -59,7 +61,7 @@ public class TicTacToeView extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.board);
         LinearLayout layout = findViewById(R.id.board);
         this.playerNameView = findViewById(R.id.player_name);
         this.winnerNameView = findViewById(R.id.winner_name);
@@ -69,7 +71,6 @@ public class TicTacToeView extends AppCompatActivity {
         layout.addView(this.createRow(IntStream.rangeClosed(7, 9).toArray()));
 
         findViewById(R.id.reset).setOnClickListener((button) -> {
-            System.out.println("Resetting ------>");
             this.ticTacToe.reset();
             this.resetLayout(layout);
             this.playerNameView.setText(this.ticTacToe.getCurrentPlayer().titleForTurn());
@@ -78,7 +79,6 @@ public class TicTacToeView extends AppCompatActivity {
     }
 
     private void resetLayout(LinearLayout layout) {
-        System.out.println("Resetting layout------>");
         int childCount = layout.getChildCount();
 
         for (int i = 0; i < childCount; i++) {
