@@ -5,10 +5,12 @@ import java.util.Set;
 
 public class Player {
     private final Symbol symbol;
+    private final String name;
     private Set<Integer> moves;
 
-    public Player(Symbol symbol) {
+    public Player(Symbol symbol, String name) {
         this.symbol = symbol;
+        this.name = name;
         this.moves = new HashSet<>();
     }
 
@@ -24,8 +26,12 @@ public class Player {
         return symbol;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public String titleForTurn() {
-        return String.format("Player %s's turn", this.symbol);
+        return String.format("%s's turn. %s", this.name, this.symbol);
     }
 
     public void reset() {

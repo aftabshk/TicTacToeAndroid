@@ -36,7 +36,7 @@ public class MoveListener implements View.OnClickListener {
 
         Player winner = game.winner();
         if (winner != null) {
-            winnerNameView.setText(String.format("%s is winner!", winner.getSymbol()));
+            winnerNameView.setText(String.format("%s is winner!", winner.getName()));
         }
     }
 }

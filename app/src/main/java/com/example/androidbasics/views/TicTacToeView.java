@@ -20,7 +20,7 @@ import java.util.stream.IntStream;
 
 public class TicTacToeView extends AppCompatActivity {
 
-    private final TicTacToe ticTacToe = new TicTacToe();
+    private TicTacToe ticTacToe;
     private TextView playerNameView;
     private TextView winnerNameView;
 
@@ -61,6 +61,15 @@ public class TicTacToeView extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String player1Name = "";
+        String player2Name = "";
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            player1Name = extras.getString("player1Name");
+            player2Name = extras.getString("player2Name");
+        }
+        this.ticTacToe = new TicTacToe(player1Name, player2Name);
         setContentView(R.layout.board);
         LinearLayout layout = findViewById(R.id.board);
         this.playerNameView = findViewById(R.id.player_name);

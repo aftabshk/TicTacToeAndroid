@@ -12,8 +12,8 @@ public class TicTacToe {
     private Integer currentPlayerIndex;
     private final Set<Set<Integer>> winningMoves;
 
-    public TicTacToe() {
-        this.players = Arrays.asList(new Player(Symbol.X), new Player(Symbol.O));
+    public TicTacToe(String player1Name, String player2Name) {
+        this.players = Arrays.asList(new Player(Symbol.X, player1Name), new Player(Symbol.O, player2Name));
         this.currentPlayerIndex = 0;
         this.winningMoves = new HashSet<>(Arrays.asList(
                 new HashSet<>(Arrays.asList(1, 2, 3)),
