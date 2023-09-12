@@ -15,8 +15,7 @@
 
         <activity
             android:name=".views.TicTacToeView"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".views.LandingPageView"
             android:exported="true">
@@ -26,5 +25,7 @@
             </intent-filter>
         </activity>
     </application>
+
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
 </manifest>
